@@ -1,0 +1,10 @@
+# Voxtral server (scripts/voxtral_server.py). Install in a venv.
+# For GPU: install PyTorch first from https://pytorch.org/get-started/locally/ then: pip install -r voxtral-requirements.txt
+torch>=2.0.0
+transformers>=5.2.0
+accelerate
+mistral-common[audio]
+flask
+python-dotenv
+soundfile
+librosa

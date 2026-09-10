@@ -1,0 +1,48 @@
+{
+  "name": "@forwardalliance/radio-monitor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --parallel app:dev whisper:start",
+    "start": "bun run --parallel app:start whisper:start",
+    "clean": "rm -r ./data/audios",
+    "app:dev": "bun --hot src/index.ts",
+    "app:start": "NODE_ENV=production ./out/server",
+    "app:build": "bun run build.ts",
+    "db:generate": "drizzle-kit generate --dialect sqlite --schema ./src/db/schema.ts",
+    "db:migrate": "bun run migrate.ts",
+    "export-for-finetune": "bun run scripts/export-for-finetune.ts",
+    "whisper:build": "cd providers/whisper.cpp && cmake -B build && cmake --build build -j --config Release",
+    "whisper:download-model": "cd providers/whisper.cpp && ./models/download-ggml-model.sh large-v3",
+    "whisper:download-vad": "cd providers/whisper.cpp && ./models/download-vad-model.sh silero-v6.2.0",
+    "whisper:prepare": "bun run --sequential whisper:build whisper:download-model whisper:download-vad",
+    "whisper:start": "./providers/whisper.cpp/build/bin/whisper-server -m ./providers/whisper.cpp/models/ggml-large-v3.bin --port 8080 -sns --vad --vad-model ./providers/whisper.cpp/models/ggml-silero-v6.2.0.bin"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.104.2",
+    "@hono/zod-validator": "^0.7.6",
+    "@t3-oss/env-core": "^0.13.10",
+    "@tailwindcss/typography": "^0.5.20",
+    "bun-plugin-tailwind": "^0.1.2",
+    "drizzle-orm": "^0.45.1",
+    "ffmpeg-static": "^5.3.0",
+    "hono": "^4.11.9",
+    "lucide-react": "^0.574.0",
+    "marked": "^18.0.5",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-markdown": "^10.1.0",
+    "react-resizable-panels": "^4.6.4",
+    "react-use-audio-player": "^4.0.2",
+    "swr": "^2.4.0",
+    "tailwindcss": "^4.1.11",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.9",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.9"
+  }
+}

@@ -1,0 +1,12 @@
+# FireRed server (scripts/firered_server.py). Run from a venv; set FIREREDASR_REPO to the clone.
+# FireRedASR code + model weights come from the clone (see docs/firered.md).
+torch>=2.0.0
+transformers>=4.46.3
+cn2an>=0.5.23
+kaldiio>=2.18.0
+kaldi_native_fbank>=1.15
+numpy>=1.26.1
+peft>=0.13.2
+sentencepiece
+flask
+python-dotenv

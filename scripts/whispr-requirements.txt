@@ -1,0 +1,2 @@
+# scripts/whispr.py — pip install -r whispr-requirements.txt
+pyautogui>=0.9.54
